@@ -1,0 +1,286 @@
+{
+  "title": "Xerion Capital",
+  "description": "Mentorship trading berbasis Time & Price: struktur harga, Fibonacci, siklus waktu, dan manajemen risiko yang bisa dihitung.",
+  "hero": {
+    "lines": [
+      "they can manipulate price",
+      "but they cant manipulate time"
+    ],
+    "description": "xerion capital is platform menthorsip for trader or proprierty trader and we will give your big advantages and monitoring risk management about time and price",
+    "ctas": [
+      "Lihat program mentorship",
+      "Buka Time & Price Lab"
+    ]
+  },
+  "method": {
+    "heading": "Empat persamaan di balik setiap keputusan.",
+    "intro": "Hitam untuk harga, biru untuk waktu.",
+    "equations": [
+      {
+        "title": "price",
+        "formula": "P(r) = H − r · (H − L)",
+        "description": "Titik koreksi dihitung dari swing terakhir. Level r = 0,382, 0,5, dan 0,618 menjadi zona pengamatan, bukan prediksi."
+      },
+      {
+        "title": "Time",
+        "formula": "T(k) = t<sub>H</sub> + k · Δt",
+        "description": "Durasi swing diproyeksikan ke depan dengan rasio k = 0,618, 1, dan 1,618. Hasilnya jendela waktu tempat reaksi paling mungkin muncul."
+      },
+      {
+        "title": "Keselarasan",
+        "formula": "s = ΔP / Δt &nbsp;→&nbsp; 1×1 bila ΔP = s · Δt",
+        "description": "Price-time squaring: ketika rasio waktu dan rasio harga sama, kedua sumbu saling mengonfirmasi. Di titik itulah kita mencari setup."
+      },
+      {
+        "title": "Risiko",
+        "formula": "Lot = (Saldo · risiko%) / (|Entry − SL| · V)",
+        "description": "Ukuran posisi ditentukan oleh jarak stop loss, bukan oleh keyakinan. Ekspektasi per trade: E = p · R − (1 − p)."
+      }
+    ]
+  },
+  "lab": {
+    "heading": "Time & Price Lab",
+    "intro": "Nyalakan overlay, lalu arahkan kursor ke chart. Setiap titik dihitung terhadap swing yang sama: berapa bar sejak high, berapa persen koreksi, dan di mana garis 1×1 berada.",
+    "overlays": [
+      {
+        "key": "retr",
+        "label": "Retracement"
+      },
+      {
+        "key": "ext",
+        "label": "Ekstensi"
+      },
+      {
+        "key": "cycle",
+        "label": "Proyeksi siklus"
+      },
+      {
+        "key": "zones",
+        "label": "Zona waktu Fibonacci"
+      },
+      {
+        "key": "square",
+        "label": "Kotak price-time"
+      },
+      {
+        "key": "gann",
+        "label": "Gann fan"
+      }
+    ]
+  },
+  "calculate": {
+    "heading": "calculate",
+    "intro": "Ubah angkanya, hasilnya langsung berubah. Tidak ada data yang dikirim ke mana pun.",
+    "titles": [
+      "Proyeksi time & price",
+      "Risiko dan ukuran posisi"
+    ],
+    "descriptions": [
+      "Masukkan dua pivot dari swing yang sudah selesai. Pivot A adalah awal, pivot B adalah akhir.",
+      "Default memakai contoh emas (1 lot = 100 oz, jadi pergerakan 1 poin bernilai $100 per lot). Sesuaikan nilai kontrak untuk instrumenmu."
+    ]
+  },
+  "results": {
+    "heading": "Hasil dicatat dalam R, bukan dalam angka yang besar",
+    "intro": "Satu R adalah risiko awal sebuah trade,Dengan satuan ini, hasil akun besar dan kecil bisa dibandingkan dengan realitas <span class=\"tag\">Data contoh</span> Angka di bawah dihasilkan dari simulasi 120 trade untuk menunjukkan format laporan. Ganti dengan hasil akun terverifikasi milikmu (lihat bagian <code>RESULTS</code> di kode).",
+    "journalHeading": "Jurnal trade terpilih",
+    "journalDescription": "Setiap entri mencatat alasan dari sisi waktu dan harga. Contoh format, bukan rekam jejak nyata.",
+    "monthNote": "Satu kotak adalah satu bulan (10 trade). Arsir diagonal berarti bulan rugi.",
+    "headers": [
+      "Instrumen",
+      "Arah",
+      "Entry",
+      "SL",
+      "Exit",
+      "Hasil",
+      "Dasar time & price"
+    ],
+    "rows": [
+      [
+        "XAUUSD",
+        "Buy",
+        "2.641,5",
+        "2.634,0",
+        "2.668,2",
+        "+3,6R",
+        "Retrace 0,618 di jendela 1,0×Δt"
+      ],
+      [
+        "EURUSD",
+        "Sell",
+        "1,0842",
+        "1,0861",
+        "1,0804",
+        "+2,0R",
+        "Kotak price-time penuh, reaksi di 0,5"
+      ],
+      [
+        "gbpjpy",
+        "Buy",
+        "191,40",
+        "190,90",
+        "190,90",
+        "−1,0R",
+        "Zona waktu 13, harga menembus 0,786"
+      ],
+      [
+        "NAS100",
+        "Sell",
+        "20.180",
+        "20.240",
+        "19.995",
+        "+3,1R",
+        "Ekstensi 1,272 bertemu proyeksi 1,618×Δt"
+      ],
+      [
+        "XAUUSD",
+        "Buy",
+        "2.655,0",
+        "2.649,0",
+        "2.664,0",
+        "+1,5R",
+        "Garis 1×2 sebagai support"
+      ],
+      [
+        "USDJPY",
+        "Sell",
+        "149,80",
+        "150,20",
+        "150,20",
+        "−1,0R",
+        "Waktu cocok, harga tidak: setup dibatalkan"
+      ]
+    ],
+    "memberHeading": "Member<span class=\"tag\">Contoh</span>",
+    "quotes": [
+      {
+        "quote": "Saya berhenti menebak. Sekarang setiap entry punya angka: level, waktu, dan batas rugi.",
+        "author": "Rizky, peserta kohort 4"
+      },
+      {
+        "quote": "Review jurnal tiap minggu membuat saya sadar kerugian terbesar saya datang dari ukuran posisi, bukan dari analisis.",
+        "author": "Dewi, peserta kohort 3"
+      },
+      {
+        "quote": "Konsep kotak price-time akhirnya masuk akal setelah saya mencoba sendiri di Lab.",
+        "author": "Andre, peserta kohort 5"
+      }
+    ]
+  },
+  "curriculum": {
+    "heading": "6 Bulan Menthorsip",
+    "intro": "menggunakan konsep modeling menthorsip selama 6 bulan, dengan fee yang berbeda dan jika 6 bulan selesai tidak diwajibkan payment spp untuk berada di menthorsip, namun diwajibkan jika mau melanjutkan study new materi",
+    "items": [
+      {
+        "numeral": "I",
+        "title": "Structure Price Action",
+        "body": "Menggunakan Konsep ICT Time then price, dengan algorithm yang advance serta time cycle versi xerion capital dengan adanya sbuah tools tambahan yang hanya ada di xerion capital untuk menentukan suatu narative."
+      },
+      {
+        "numeral": "II",
+        "title": "Price Level and time dilatation",
+        "body": "perlu menggunakan konsep quarterly dan price level tertentu untuk dilatation, dan menggunakan konsep po3"
+      },
+      {
+        "numeral": "III",
+        "title": "Waktu: siklus dan jendela reaksi",
+        "body": "Mengukur Δt, proyeksi 0,618 / 1 / 1,618, Membedakan time window yang bermakna."
+      },
+      {
+        "numeral": "IV",
+        "title": "Keselarasan price-time",
+        "body": "menggunakan konsep Algorithm Narative - confluence - execution"
+      },
+      {
+        "numeral": "V",
+        "title": "risk, position, and psikologis",
+        "body": "Ukuran posisi berbasis stop loss, ekspektasi, drawdown<ul> <li>Batas risk harian dan mingguan</li> <li>plan saat losing a row</li> </ul>"
+      },
+      {
+        "numeral": "VI",
+        "title": "Eksekusi live dan review jurnal",
+        "body": "live session, discord bareng, journal review admin, journal review and koreksi member, fase set up 1 on 1, fundamental area"
+      }
+    ]
+  },
+  "program": {
+    "heading": "choose your study",
+    "items": [
+      {
+        "name": "Foundation",
+        "price": "30$",
+        "period": "",
+        "features": [
+          "fundamental intermediate dan akses 1 discord xerion",
+          "Akses penuh ke Time & Price Lab",
+          "Template jurnal trading. beberapa tools",
+          "Komunitas peserta, discord with admin"
+        ],
+        "cta": "choose study",
+        "href": "https://wa.me/+62881027154083?text=bang+aku+mau+join+foundation",
+        "featured": false
+      },
+      {
+        "name": "menthorsip",
+        "price": "140$",
+        "period": "/ 6 month",
+        "features": [
+          "join discord 2 xerion capital",
+          "Sesi live mingguan, 1 on 1 session, fundamental session",
+          "Review jurnal pribadi, materi time then price dan seputar xerion capital",
+          "menggunakan tools dari xerion capital"
+        ],
+        "cta": "choose your study",
+        "href": "https://wa.me/+62881027154083?text=bang+aku+mau+join+xerion",
+        "featured": true
+      },
+      {
+        "name": "stage 2 xerion capital",
+        "price": "Only member xerion jika lanjutan",
+        "period": "",
+        "features": [
+          "lanjutan time then price, offline session jika satu lokasi",
+          "1 on 1 session, fundamental pre advance smpai jadi model system",
+          "Build narative algorithm berdasarkan kombinasi fundamental dan teknikal dari stage 1 dn 2",
+          "koreksi tiap journal dan review lanjutan, mendapatkan akses tools dan software, dan free sertifikat"
+        ],
+        "cta": "choose study",
+        "href": "https://wa.me/+62881027154083?text=bang+aku+mau+join+lanjutanxerion",
+        "featured": false
+      }
+    ]
+  },
+  "faq": {
+    "heading": "Pertanyaan yang sering muncul.",
+    "items": [
+      {
+        "question": "Apakah ada jaminan profit?",
+        "answer": "Tidak, Tidak ada mentor yang bisa menjamin profit. Yang kami ajarkan adalah how to build narative dan gimana eksekusi sesuai model sendiri tanpa adanya sinyal"
+      },
+      {
+        "question": "Saya pemula. Apakah cocok?",
+        "answer": "Cocok, tapi tidak dengan kemalasan, di xerion tidak cocok malas"
+      },
+      {
+        "question": "Berapa modal yang dibutuhkan?",
+        "answer": "modal yang dibutuhkan kemungkinan berdasarkan equity, dan kemungkinan diberikan modal funded free sebagai evaluasi journal"
+      },
+      {
+        "question": "Platform apa yang dipakai?",
+        "answer": "sierra char/tradingview, mt5, discord, investopedia"
+      },
+      {
+        "question": "Bagaimana cara melihat hasil yang sebenarnya?",
+        "answer": "Hasil akun mentor dipublikasikan lewat laporan terverifikasi, dan review journal mu melalui discord dan di koreksi secara real time"
+      }
+    ]
+  },
+  "closing": {
+    "heading": "TIME THEN PRICE",
+    "cta": "lets join us"
+  },
+  "footer": {
+    "risk": "Peringatan risiko. Trading forex, emas, indeks, dan instrumen berleverage mengandung risiko tinggi dan dapat menyebabkan kerugian melebihi modal. Konten ini bersifat edukasi dan bukan nasihat keuangan. Kinerja masa lalu tidak menjamin hasil di masa depan.",
+    "copyright": "© 2026 Xerion Capital"
+  }
+}
