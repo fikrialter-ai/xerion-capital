@@ -2,6 +2,8 @@
 
 Versi pengembangan dari kode yang diberikan. **Teks, bahasa Inggris, ejaan, kapitalisasi, isi FAQ, materi, paket, hasil contoh dan testimoni contoh mengikuti HTML asli. Jangan menyunting isinya tanpa permintaan pengguna.**
 
+Atas permintaan pengguna pada 15 Oktober 2026, kapitalisasi tampilan dirapikan: awal kalimat/judul, nama program, merek, dan singkatan. Kata, bahasa, harga, dan isi FAQ tetap dipertahankan.
+
 Sumber asli: `../Xerion_Capital_VSCode/index (1).html`, dari `FILE/xerioncapital.rar`. File asli tidak ditimpa. Revisi ini menggantikan versi pengembangan awal yang sempat mengubah copy.
 
 ## Jalankan
@@ -28,7 +30,8 @@ Hasil produksi berada di `dist/`. React memerlukan proses build; jangan membuka 
 - `tests/fixtures/original.html` merupakan salinan sumber untuk pembandingan. Jangan menggantinya untuk sekadar membuat tes lolos.
 - `tests/content.test.js` membandingkan konten dengan sumber dan memastikan heading Inggris, kelima FAQ, materi, paket, jurnal dan contoh member dipertahankan.
 - Jangan menerjemahkan, membetulkan typo, menambah janji, mengganti CTA, atau mengubah jawaban FAQ tanpa permintaan pengguna.
-- Nama/label asli termasuk `menthorsip`, `choose your study`, `TIME THEN PRICE`, dan `lets join us` sengaja dipertahankan.
+- `src/content-capitalization.js` memuat penyesuaian kapitalisasi tampilan yang diminta pengguna. File sumber asli tetap utuh; guard dan `tests/capitalization.test.js` memastikan perubahan hanya pada kapitalisasi dan spasi.
+- Ejaan asli seperti `menthorsip` tetap dipertahankan, dengan kapitalisasi tampilan seperti `Menthorsip`, `Choose your study`, `Time then Price`, dan `Lets join us`.
 
 Jika perlu mengekstrak ulang salinan sumber yang sama:
 

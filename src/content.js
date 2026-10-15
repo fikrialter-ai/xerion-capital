@@ -1,6 +1,8 @@
-import original from './original-content.json';
+import source from './original-content.json';
+import { applyCapitalization } from './content-capitalization.js';
 
-// Verbatim copy extracted from the supplied HTML. Preserve spelling, language and capitalization.
+// Original wording with the capitalization cleanup requested by the user.
+const original = applyCapitalization(source);
 export { original };
 export const WHATSAPP = '62881027154083';
 export const whatsappLink = () => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent('Halo Xerion Capital, saya ingin tanya program mentorship.')}`;

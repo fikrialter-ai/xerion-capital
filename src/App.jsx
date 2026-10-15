@@ -6,7 +6,7 @@ import Calculators from './components/Calculators.jsx';
 import Results from './components/Results.jsx';
 import { original, faqs, programs, whatsappLink } from './content.js';
 
-const navigation = [{ href: '#metode', text: 'Methode' }, { href: '#lab', text: 'Time & Price Lab' }, { href: '#hitung', text: 'calculate' }, { href: '#hasil', text: 'result' }, { href: '#kurikulum', text: 'material' }, { href: '#program', text: 'program' }];
+const navigation = [{ href: '#metode', text: 'Methode' }, { href: '#lab', text: 'Time & Price Lab' }, { href: '#hitung', text: 'Calculate' }, { href: '#hasil', text: 'Result' }, { href: '#kurikulum', text: 'Material' }, { href: '#program', text: 'Program' }];
 
 function Header() {
   const [open, setOpen] = useState(false);
@@ -28,7 +28,7 @@ function Header() {
     try { localStorage.setItem('xerion-theme', next); } catch { /* Theme remains usable without storage. */ }
   }
   return <header className="site-header" ref={header}><div className="wrap header-inner"><Brand /><nav className="desktop-navigation" aria-label="Navigasi utama">{navigation.map(item => <a key={item.href} href={item.href}>{item.text}</a>)}</nav><div className="header-actions"><button type="button" className="theme-button" onClick={toggleTheme} aria-label="Ganti tema terang atau gelap" title="Ganti tema"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" strokeWidth="1.5" /><path d="M12 4a8 8 0 0 1 0 16z" fill="currentColor" /></svg></button><a className="button button-small header-consult" href={whatsappLink()} target="_blank" rel="noopener noreferrer">Daftar <Arrow diagonal /></a><button ref={menuButton} type="button" className="menu-button" aria-expanded={open} aria-controls="mobile-navigation" aria-label={open ? 'Tutup menu' : 'Buka menu'} onClick={() => setOpen(value => !value)}><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">{open ? <path d="m6 6 12 12M6 18 18 6" /> : <path d="M4 8h16M4 16h16" />}</svg></button></div></div>
-    <nav id="mobile-navigation" className="mobile-navigation" aria-label="Navigasi ponsel" hidden={!open}>{navigation.map(item => <a href={item.href} key={item.href} onClick={() => setOpen(false)}>{item.href === '#program' ? 'Program' : item.text}<Arrow /></a>)}<a className="mobile-consult" href={whatsappLink()} target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)}>Daftar <Arrow diagonal /></a></nav>
+    <nav id="mobile-navigation" className="mobile-navigation" aria-label="Navigasi ponsel" hidden={!open}>{navigation.map(item => <a href={item.href} key={item.href} onClick={() => setOpen(false)}>{item.text}<Arrow /></a>)}<a className="mobile-consult" href={whatsappLink()} target="_blank" rel="noopener noreferrer" onClick={() => setOpen(false)}>Daftar <Arrow diagonal /></a></nav>
   </header>;
 }
 

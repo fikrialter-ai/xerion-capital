@@ -1,5 +1,17 @@
 # Verification — content-preserving revision, 15 October 2026
 
+## Capitalization revision — 15 October 2026
+
+The user subsequently requested consistent uppercase/lowercase throughout the website. Display copy now uses sentence case for headings/prose, proper capitalization for program and brand names, and uppercase acronyms. Original wording, English, prices, URLs and FAQ content remain intact; the raw source JSON and HTML fixture are unchanged.
+
+- `node --test`: 20 passed, 0 failed, including four capitalization checks comparing every content field with the raw source.
+- Production build: Vite 7.3.7, 39 modules; HTML 1.76 kB, CSS 38.23 kB, JS 238.81 kB. No dependency changes.
+- Local production preview: inspected program cards, menu labels, curriculum and FAQ capitalization. Opened the platform FAQ and confirmed the original words with corrected product-name capitalization.
+- Desktop and 390px mobile screenshots inspected; mobile page width 390px with document scroll width 375px (no horizontal page overflow). Mobile Program navigation opens the revised section and closes the menu.
+- Browser console: no captured warnings/errors.
+
+The sections below record the earlier original-copy restoration, before the user-authorized capitalization revision.
+
 This revision follows the user's correction: preserve original contents, English text and FAQ. The earlier copy rewrite has been replaced.
 
 ## Automated checks
