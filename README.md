@@ -1,74 +1,43 @@
-# Xerion Capital — React + Tailwind
+# Xerion Capital — Minimal Monochrome
 
-Versi pengembangan dari kode yang diberikan. **Teks, bahasa Inggris, ejaan, kapitalisasi, isi FAQ, materi, paket, hasil contoh dan testimoni contoh mengikuti HTML asli. Jangan menyunting isinya tanpa permintaan pengguna.**
+Revisi 16 Oktober 2026: desain hitam-putih dengan Inter dan JetBrains Mono, struktur halaman yang ringkas, serta copy baru sesuai brief pengguna. React 19, Vite 7, dan Tailwind 4; tanpa dependensi tambahan.
 
-Atas permintaan pengguna pada 15 Oktober 2026, kapitalisasi tampilan dirapikan: awal kalimat/judul, nama program, merek, dan singkatan. Kata, bahasa, harga, dan isi FAQ tetap dipertahankan.
+## Jalankan lokal
 
-Sumber asli: `../Xerion_Capital_VSCode/index (1).html`, dari `FILE/xerioncapital.rar`. File asli tidak ditimpa. Revisi ini menggantikan versi pengembangan awal yang sempat mengubah copy.
-
-## Jalankan
-
-Gunakan Node.js 24 LTS. Buka terminal pada folder aplikasi:
+Gunakan Node.js 24 LTS dari folder aplikasi:
 
 ```powershell
 npm ci
 npm run dev
 ```
 
+Untuk pratinjau build produksi:
+
 ```powershell
 npm test
 npm run build
-npm run preview
+npm run preview -- --port 4173 --strictPort
 ```
 
-Hasil produksi berada di `dist/`. React memerlukan proses build; jangan membuka index.html langsung dengan klik ganda.
+Pratinjau: http://127.0.0.1:4173/ . Build berada di `dist/`.
 
-## Aturan konten
+## Konten dan komponen
 
-- `src/original-content.json` menyimpan teks yang diambil dari HTML asli; yang dinormalisasi hanya whitespace HTML.
-- `scripts/extract-content.mjs` mengekstrak teks dari dokumen yang dipilih, tanpa menjalankan script di dalam dokumen.
-- `tests/fixtures/original.html` merupakan salinan sumber untuk pembandingan. Jangan menggantinya untuk sekadar membuat tes lolos.
-- `tests/content.test.js` membandingkan konten dengan sumber dan memastikan heading Inggris, kelima FAQ, materi, paket, jurnal dan contoh member dipertahankan.
-- Jangan menerjemahkan, membetulkan typo, menambah janji, mengganti CTA, atau mengubah jawaban FAQ tanpa permintaan pengguna.
-- `src/content-capitalization.js` memuat penyesuaian kapitalisasi tampilan yang diminta pengguna. File sumber asli tetap utuh; guard dan `tests/capitalization.test.js` memastikan perubahan hanya pada kapitalisasi dan spasi.
-- Ejaan asli seperti `menthorsip` tetap dipertahankan, dengan kapitalisasi tampilan seperti `Menthorsip`, `Choose your study`, `Time then Price`, dan `Lets join us`.
+- `src/original-content.json` adalah sumber copy editorial terkini. Nama file dipertahankan untuk kompatibilitas. Arahan pengguna terbaru menggantikan batasan lama yang hanya mengizinkan perubahan kapitalisasi.
+- `src/content-capitalization.js` menyalin data tanpa substitusi lama. `src/content.js` menyediakan model konten untuk komponen.
+- `tests/fixtures/original.html` merupakan arsip historis, dipakai untuk memastikan angka contoh jurnal dan peringatan risiko tidak berubah. Jangan mengekstrak ulang arsip ini untuk menimpa copy terkini.
+- `src/App.jsx`: hero → metode → kurikulum → Lab → kalkulator → jurnal → program → FAQ. Navigasi memakai Bahasa Indonesia.
+- `src/styles.css`: tema monokrom gelap/terang, Inter untuk teks, JetBrains Mono untuk rumus dan data. Tidak ada ilustrasi besar, tier label, panel kesesuaian, atau CSS untuk grafik performa dummy.
+- `PriceLab.jsx`: enam overlay (retracement, ekstensi, proyeksi siklus waktu, zona waktu Fibonacci, kotak price-time, Gann fan). Tiga overlay inti aktif saat pertama dibuka; indikator tambahan dapat diaktifkan satu per satu. Pemilihan bar lewat klik/geser, keyboard, dan slider. Data chart tetap simulasi latihan; tidak ada replay otomatis.
+- Di bawah chart, penjelasan harga, waktu, dan keselarasan mengikuti bar terpilih. `src/lib/lab-explanation.js` menggunakan harga penutupan yang sama dengan readout, membedakannya dari high/low sumbu candle. Tautan setelah penjelasan menuju kalkulator untuk latihan dengan data sendiri.
+- `Calculators.jsx`: proyeksi waktu/retracement dan kalkulator risiko dengan validasi dari helper numerik. Risiko posisi aktual ditampilkan setelah lot dibulatkan ke bawah.
+- `Results.jsx`: satu tabel contoh pencatatan jurnal, tanpa kurva ekuitas, statistik dummy, kotak bulanan, atau testimoni.
+- `Curriculum.jsx`: enam materi interaktif dengan copy yang diberikan pengguna.
+- `src/lib/calculations.js` dan `src/lib/market.js` tidak diubah. Pengujian angka, pembulatan, dan input tidak valid tetap tersedia.
+- File draft alternatif tetap disimpan lokal dan dapat dibuka lewat `/draft/` saat `npm run dev`. Build produksi hanya menggunakan `index.html` utama, sehingga draft tidak ikut dipublikasikan.
 
-Jika perlu mengekstrak ulang salinan sumber yang sama:
+## Status
 
-```powershell
-node scripts/extract-content.mjs tests/fixtures/original.html
-npm test
-```
+Branch `main` di repository `fikrialter-ai/xerion-capital` terhubung ke Vercel. Build produksi memakai `npm ci`, `npm run build`, dan output `dist/` sesuai `vercel.json`. ZIP lama tidak mewakili perubahan terbaru.
 
-## Struktur
-
-- `src/App.jsx`: navigasi, hero, metode, paket, FAQ dan footer dengan teks sumber.
-- `src/components/Curriculum.jsx`: enam materi asli dalam panel interaktif.
-- `src/components/PriceLab.jsx`: enam overlay dengan label asli, data candle asli, readout, slider, keyboard dan replay.
-- `src/components/Calculators.jsx`: label, deskripsi, default input, tabel proyeksi, dan narasi hasil asli.
-- `src/lib/calculations.js`: validasi perhitungan dan pembulatan lot ke bawah agar anggaran risiko tidak terlampaui. Langkah lot dipakai 0,01 pada UI sumber.
-- `src/components/Results.jsx`: simulasi 120 trade dari parameter asli, equity chart, hasil bulanan, jurnal dan member contoh. Label Data contoh / Contoh tetap ditampilkan.
-- `src/lib/market.js`: algoritma candle dan pencarian swing dari sumber.
-- `src/styles.css`: Tailwind dan desain khusus yang responsif, termasuk mode terang/gelap.
-- `src/components/Brand.jsx`: logo orbital yang diadaptasi dari SVG sumber.
-
-## Vercel
-
-Repository: https://github.com/fikrialter-ai/xerion-capital
-
-Import repository tersebut ke Vercel dengan Root Directory `.`. `vercel.json` menetapkan framework Vite, install `npm ci`, build `npm run build`, dan output `dist`. Versi Node 24.x ditetapkan dalam package.json.
-## Netlify
-
-Upload isi folder `dist/`, atau gunakan `FILE/xerion-academy-netlify.zip`. Root ZIP deploy harus berisi `index.html`, `favicon.svg`, `_headers`, dan `assets/`.
-
-Jika menggunakan Git dengan seluruh workspace ini, base directory adalah `xerion-academy`, build command `npm run build`, publish directory `dist`. Konfigurasi berada di `netlify.toml`.
-
-Website Netlify lama tetap terpisah. Deployment dari repository GitHub ini dapat dikelola melalui Vercel. File ZIP sumber dan deploy mengikuti revisi teks asli.
-
-## Aset dan batas
-
-Logo SVG dari sumber sudah digunakan. Foto/profil mentor, foto kegiatan, atau aset tambahan dapat dimasukkan setelah diberikan pengguna, tanpa mengubah teks yang ada.
-
-Versi ini merupakan landing page dan tools belajar publik. Belum ada login member, LMS, pembayaran atau penyimpanan jurnal. WhatsApp hanya membuka percakapan dengan pesan sumber; tidak mengirim otomatis. Chart dan laporan contoh tetap menggunakan simulasi sumber. Google Fonts memakai koneksi internet dan memiliki fallback font lokal.
-
-Lihat `VERIFICATION.md` untuk hasil pemeriksaan revisi terkini.
+Google Fonts memerlukan koneksi internet dan memiliki fallback lokal. WhatsApp hanya membuka percakapan; belum ada login, LMS, pembayaran, atau penyimpanan jurnal. Lihat `VERIFICATION.md` untuk hasil pemeriksaan.

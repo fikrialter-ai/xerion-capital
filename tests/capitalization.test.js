@@ -1,45 +1,40 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { applyCapitalization, caseInsensitiveCopy } from '../src/content-capitalization.js';
+import { applyCapitalization, capitalizationEdits } from '../src/content-capitalization.js';
 
 const source = JSON.parse(readFileSync(new URL('../src/original-content.json', import.meta.url), 'utf8'));
 const display = applyCapitalization(source);
 
-test('capitalization pass preserves every word, number, punctuation mark and data field', () => {
-  function compare(before, after, path = '') {
-    if (typeof before === 'string') assert.equal(caseInsensitiveCopy(after), caseInsensitiveCopy(before), path);
-    else if (before && typeof before === 'object') {
-      assert.deepEqual(Object.keys(after), Object.keys(before), path);
-      for (const key of Object.keys(before)) compare(before[key], after[key], `${path}.${key}`);
-    } else assert.equal(after, before, path);
-  }
-  compare(source, display);
+test('approved editorial copy reaches the display without legacy capitalization substitutions', () => {
+  assert.deepEqual(capitalizationEdits, []);
+  assert.deepEqual(display, source);
+  assert.notStrictEqual(display, source);
 });
 
-test('program names, headings, CTA labels and brand names use consistent case', () => {
-  assert.equal(display.program.heading, 'Choose your study');
-  assert.deepEqual(display.program.items.map(program => program.name), ['Foundation', 'Menthorsip', 'Stage 2 Xerion Capital']);
-  assert.deepEqual(display.program.items.map(program => program.cta), ['Choose study', 'Choose your study', 'Choose study']);
-  assert.equal(display.calculate.heading, 'Calculate');
-  assert.equal(display.results.rows[2][0], 'GBPJPY');
-  assert.equal(display.closing.heading, 'Time then Price');
+test('capitalization adapter preserves source immutability at nested levels', () => {
+  const isolated = applyCapitalization(source);
+  isolated.program.items[0].name = 'Changed in consumer';
+  isolated.faq.items[0].answer = 'Changed in consumer';
+  assert.equal(source.program.items[0].name, 'Foundation');
+  assert.match(source.faq.items[0].answer, /^Tidak\./);
 });
 
-test('FAQ retains all five original questions and answers with case-only changes', () => {
-  assert.equal(display.faq.items.length, 5);
-  for (let i = 0; i < 5; i++) {
-    assert.equal(display.faq.items[i].question, source.faq.items[i].question);
-    assert.equal(caseInsensitiveCopy(display.faq.items[i].answer), caseInsensitiveCopy(source.faq.items[i].answer));
-  }
-  assert.equal(display.faq.items[3].answer, 'Sierra Char/TradingView, MT5, Discord, Investopedia');
+test('programs, technical acronyms and instrument symbols use approved casing', () => {
+  assert.deepEqual(display.program.items.map(p => p.name), ['Foundation', 'Core Mentorship', 'Stage 2']);
+  assert.equal(display.calculate.heading, 'Kalkulator Risiko & Proyeksi');
+  assert.equal(display.closing.heading, 'Time, Then Price.');
+  for (const row of display.results.rows) assert.match(row[0], /^[A-Z0-9]+$/);
+  assert.match(display.curriculum.items[1].body, /Power of Three \(PO3\)/);
+  assert.equal(display.faq.items[3].answer, 'Sierra Chart, TradingView, MT5, dan Discord.');
 });
 
-test('source copy stays immutable and formulas, prices, addresses and examples remain intact', () => {
-  assert.equal(source.program.heading, 'choose your study');
-  assert.deepEqual(display.program.items.map(program => program.href), source.program.items.map(program => program.href));
-  assert.deepEqual(display.method.equations.map(equation => equation.formula), source.method.equations.map(equation => equation.formula));
-  assert.deepEqual(display.results.quotes, source.results.quotes);
-  assert.equal(display.program.items[0].price, '30$');
-  assert.equal(display.program.items[1].price, '140$');
+test('new wording, punctuation, prices, formulas and FAQ are preserved exactly by the compatibility adapter', () => {
+  assert.deepEqual(display.faq, source.faq);
+  assert.deepEqual(display.method, source.method);
+  assert.deepEqual(display.program, source.program);
+  assert.equal(display.hero.lines[1], "but they can't manipulate time.");
+  assert.equal(display.program.items[0].price, '$30');
+  assert.equal(display.program.items[1].price, '$140');
+  assert.equal(display.program.items[2].price, 'Invite Only');
 });

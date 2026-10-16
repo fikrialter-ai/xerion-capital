@@ -1,7 +1,7 @@
 import source from './original-content.json';
 import { applyCapitalization } from './content-capitalization.js';
 
-// Original wording with the capitalization cleanup requested by the user.
+// Canonical copy for the user-requested minimal monochrome revision.
 const original = applyCapitalization(source);
 export { original };
 export const WHATSAPP = '62881027154083';

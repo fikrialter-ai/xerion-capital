@@ -18,6 +18,8 @@ test('valid sell uses the same risk budget', () => {
 test('lot rounding cannot exceed budget, including the original 4.4-point example', () => {
   const result = calculateRisk({ ...buy, entry: '138.6', stop: '134.2', target: '161.4' });
   assert.equal(result.lots, 0.22); assert.ok(result.actualRisk <= result.budget);
+  assert.ok(Math.abs(result.actualRisk - 96.8) < 1e-10);
+  assert.equal(result.budget, 100);
 });
 test('risk budget is respected over varied balances, distances and lot steps', () => {
   for (const balance of [10, 1234, 10000, 99999]) for (const risk of [0.1, 1, 5]) for (const distance of [0.1, 1.3, 4.4, 15]) for (const lotStep of [0.001, 0.01, 0.1, 1]) {
@@ -47,6 +49,8 @@ test('projection produces correct retracement and duration from the original swi
   assert.equal(result.duration, 28); assert.equal(result.direction, 'Naik');
   assert.equal(result.retracements[1].price, 144.5);
   assert.equal(result.times[1].bar, 96); assert.equal(result.times[1].hours, 112);
+  assert.deepEqual(result.times.map(time => time.ratio), [0.618, 1, 1.618]);
+  assert.deepEqual(result.retracements.map(level => level.ratio), [0.382, 0.5, 0.618, 0.786]);
 });
 test('downward swing retracement correctly goes above pivot B', () => {
   const result = calculateProjection({ ...projection, priceA: '172', priceB: '117' });
